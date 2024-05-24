@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="css/style.css">
   <title><%= item.name %></title>
 </head>
 <body>
@@ -8,10 +9,11 @@
   <img src="<%= item.imageURL %>" alt="<%= item.name %>">
   <p><%= item.description %></p>
   <ul>
-    <li>Founded: <%= item.founded %></li>
-    <li>Country: <%= item.country.name %></li>
-    <li>Capital: <%= item.country.capital %></li>
-    <li>Population: <%= item.country.population %></li>
+    <li>Founded: <%= item.founded %> ( <%= item.age %> years ago)</li>
+    <li>Active: <%= item.active %></li>
+    <li>status: <%= item.status %></li>
+    <li> <a href="/country/<%=item.country.name%>"> Country: <%= item.country.name %>  </a> </li>
   </ul>
+  <a href="/cars"> BACK TO LIST </a>
 </body>
 </html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <title><%= item.country.name %> Information </title>
+</head>
+<body>
+  <h1><%= item.country.name %></h1>
+  <img src="<%= item.country.imageURL %>" alt="<%= item.country.name %>">
+  <p><%= item.description %></p>
+  <ul>
+    <li>Capital: <%= item.country.capital %></li>
+    <li>Population: <%= item.country.population %></li>
+  </ul>
+  <a href="/cars"> BACK TO LIST </a>
+</body>
+</html>
