@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <title> Cars </title>
+</head>
+<body>
+  <table class="table">
+    <tr>
+      <th>N</th>
+      <th>Brand name</th>
+      <th>Founded date</th>
+    </tr>
+    <% data.forEach(item => { %>
+      <tr>
+        <td> <%= item.id %> </td>
+        <td> <a href="/details/<%= item.name %>"> <%= item.name %> </a> </td>
+        <td> <%= item.founded %> </td>
+      </tr>
+    <% }); %>
+  </table>
+</body>
+</html>

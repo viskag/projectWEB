@@ -1,0 +1,162 @@
+    [
+        {
+            "id": 1,
+            "name": "BMW",
+            "description": "Bayerische Motoren Werke AG is a German multinational company which produces luxury vehicles and motorcycles.",
+            "age": 104,
+            "active": true,
+            "founded": "1916-03-07",
+            "imageURL": "https://www.example.com/bmw.jpg",
+            "status": "premium",
+            "tags": ["racing", "luxury", "technology"],
+            "country": {
+                "name": "Germany",
+                "capital": "Berlin",
+                "population": 83000000
+            }
+        },
+        {
+            "id": 2,
+            "name": "Toyota",
+            "description": "Toyota Motor Corporation is a Japanese multinational automotive manufacturer.",
+            "age": 83,
+            "active": true,
+            "founded": "1937-08-28",
+            "imageURL": "https://www.example.com/toyota.jpg",
+            "status": "standard",
+            "tags": ["reliability", "innovation", "environmentalism"],
+            "country": {
+                "name": "Japan",
+                "capital": "Tokyo",
+                "population": 126500000
+            }
+        },
+        {
+            "id": 3,
+            "name": "Ford",
+            "description": "Ford Motor Company is an American multinational automaker.",
+            "age": 118,
+            "active": true,
+            "founded": "1903-06-16",
+            "imageURL": "https://www.example.com/ford.jpg",
+            "status": "standard",
+            "tags": ["American-made", "muscle cars", "innovation"],
+            "country": {
+                "name": "United States",
+                "capital": "Washington, D.C.",
+                "population": 331000000
+            }
+        },
+        {
+            "id": 4,
+            "name": "Honda",
+            "description": "Honda Motor Co., Ltd. is a Japanese public multinational conglomerate.",
+            "age": 75,
+            "active": true,
+            "founded": "1946-10-24",
+            "imageURL": "https://www.example.com/honda.jpg",
+            "status": "standard",
+            "tags": ["reliability", "performance", "innovation"],
+            "country": {
+                "name": "Japan",
+                "capital": "Tokyo",
+                "population": 126500000
+            }
+        },
+        {
+            "id": 5,
+            "name": "Mercedes-Benz",
+            "description": "Mercedes-Benz is a global automobile marque and a division of the German company Daimler AG.",
+            "age": 95,
+            "active": true,
+            "founded": "1926-06-28",
+            "imageURL": "https://www.example.com/mercedes-benz.jpg",
+            "status": "premium",
+            "tags": ["luxury", "performance", "innovation"],
+            "country": {
+                "name": "Germany",
+                "capital": "Berlin",
+                "population": 83000000
+            }
+        },
+        {
+            "id": 6,
+            "name": "Chevrolet",
+            "description": "Chevrolet, colloquially referred to as Chevy and formally the Chevrolet Division of General Motors Company.",
+            "age": 108,
+            "active": true,
+            "founded": "1911-11-03",
+            "imageURL": "https://www.example.com/chevrolet.jpg",
+            "status": "standard",
+            "tags": ["American-made", "muscle cars", "innovation"],
+            "country": {
+                "name": "United States",
+                "capital": "Washington, D.C.",
+                "population": 331000000
+            }
+        },
+        {
+            "id": 7,
+            "name": "Audi",
+            "description": "Audi AG is a German automobile manufacturer that designs, engineers, produces, markets and distributes luxury vehicles.",
+            "age": 111,
+            "active": true,
+            "founded": "1909-07-16",
+            "imageURL": "https://www.example.com/audi.jpg",
+            "status": "premium",
+            "tags": ["luxury", "performance", "innovation"],
+            "country": {
+                "name": "Germany",
+                "capital": "Berlin",
+                "population": 83000000
+            }
+        },
+        {
+            "id": 8,
+            "name": "Subaru",
+            "description": "Subaru Corporation is a Japanese multinational corporation and conglomerate that produces automobiles.",
+            "age": 83,
+            "active": true,
+            "founded": "1937-07-15",
+            "imageURL": "https://www.example.com/subaru.jpg",
+            "status": "standard",
+            "tags": ["reliability", "performance", "environmentalism"],
+            "country": {
+                "name": "Japan",
+                "capital": "Tokyo",
+                "population": 126500000
+            }
+        },
+        {
+            "id": 9,
+            "name": "Volkswagen",
+            "description": "Volkswagen is a German automaker founded in 1937 by the German Labour Front.",
+            "age": 85,
+            "active": true,
+            "founded": "1937-05-28",
+            "imageURL": "https://www.example.com/volkswagen.jpg",
+            "status": "standard",
+            "tags": ["affordability", "reliability", "performance"],
+            "country": {
+                "name": "Germany",
+                "capital": "Berlin",
+                "population": 83000000
+            }
+        },
+        {
+            "id": 10,
+            "name": "Jeep",
+            "description": "Jeep is an American automobile marque that produces sport utility vehicles and off-road vehicles.",
+            "age": 80,
+            "active": true,
+            "founded": "1941-06-17",
+            "imageURL": "https://www.example.com/jeep.jpg",
+            "status": "standard",
+            "tags": ["off-roading", "adventure", "American-made"],
+            "country": {
+                "name": "United States",
+                "capital": "Washington, D.C.",
+                "population": 331000000
+            }
+        }
+    ]

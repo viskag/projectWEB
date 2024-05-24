@@ -1,6 +1,88 @@
-body {
-  font-family: Arial, sans-serif;
+/* Reset CSS */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+}
+
+/* Table Styles */
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.table th, .table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 768px) {
+  .table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .table thead, .table tbody, .table th, .table td, .table tr {
+    display: block;
+  }
+  
+  .table tr {
+    margin-bottom: 15px;
+    background-color: #fff;
+  }
+  
+  .table td {
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding: 4px;
+    display: block;
+    text-align: right;
+  }
+  
+  .table td:last-child {
+    border-bottom: none;
+  }
+  
+  .table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 480px) { 
+  .table-container { 
+    overflow-x: auto; 
+    width: 100%; 
+  }
+
+  .table td {
+    text-align: left;
+    padding: 0;
+  }
+
+  .table th {
+    padding: 0;
+  }
+  
+  .table {
+    padding: 0;
+  }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= item.name %></title>
+</head>
+<body>
+  <h1><%= item.name %></h1>
+  <img src="<%= item.imageURL %>" alt="<%= item.name %>">
+  <p><%= item.description %></p>
+  <ul>
+    <li>Founded: <%= item.founded %></li>
+    <li>Country: <%= item.country.name %></li>
+    <li>Capital: <%= item.country.capital %></li>
+    <li>Population: <%= item.country.population %></li>
+  </ul>
+</body>
+</html>
