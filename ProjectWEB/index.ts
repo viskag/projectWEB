@@ -60,7 +60,7 @@ app.get('/cars', async (req: Request, res: Response) => {
         if (jsonData.length === 0) {
             jsonData = JSON.parse(data);
         }
-        
+
         // Pass selected columns and search query to the template
         res.render('cars', { data: jsonData, columns: selectedColumns, search: req.query.search });
     });
@@ -86,6 +86,29 @@ app.get('/details/:name', (req: Request, res: Response) => {
         res.render('details', { item });
     } else {
         res.status(404).send('Car not found');
+    }
+});
+
+// Route to display details about a country
+app.get('/country/:name', async (req: Request, res: Response) => {
+    const cName: string = req.params.name;
+    try {
+
+        // Fetch country details from the API
+        const response = await fetch(`https://api.api-ninjas.com/v1/country?name=${cName.toLowerCase()}`, {
+            headers: {
+              'X-Api-Key': 'Be0SlkkgzngczUhPkJW/WQ==VkpQ1vsazkZGV80R'
+            }});
+        if (!response.ok) {
+            throw new Error('Failed to fetch country details');
+        }
+        const cData = await response.json();
+
+        // Render the template with the country data
+        res.render('country', { country: cData});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error fetching country details');
     }
 });
 

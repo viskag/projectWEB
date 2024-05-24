@@ -2,15 +2,16 @@
 <html>
 <head>
   <link rel="stylesheet" href="css/style.css">
-  <title><%= item.country.name %> Information </title>
+  <title><%= country[0].name %> Information </title>
 </head>
 <body>
-  <h1><%= item.country.name %></h1>
-  <img src="<%= item.country.imageURL %>" alt="<%= item.country.name %>">
-  <p><%= item.description %></p>
+  <h1> <%= country[0].name %></h1>
+  <img src="<%=  %>" alt="<%= %>">
+  <p> CO2 Emissions: <%= country[0].co2_emissions %></p>
   <ul>
-    <li>Capital: <%= item.country.capital %></li>
-    <li>Population: <%= item.country.population %></li>
+    <li>Capital: <%= country[0].capital %></li>
+    <li>Population: <%= country[0].population %></li>
+    <li>GDP/capita: <%= country[0].gdp_per_capita %></li>
   </ul>
   <a href="/cars"> BACK TO LIST </a>
 </body>
