@@ -3,6 +3,36 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 import { Car } from "../interface"; // Ensure this interface is properly defined
+//import connectDB from './db/mongoose';
+//connectDB();
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://admin:adminpass@cluster0.kfmzbgp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+async function run() {
+  try {
+
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
 
 dotenv.config();
 const app: Express = express();
@@ -16,7 +46,7 @@ app.set("port", process.env.PORT ?? 3000);
 app.get("/", async (req: Request, res: Response) => {
     res.render("index", {
         title: "Dit is de startpagina",
-        message: "Testbericht"
+        message: "Testbericht: Dit is de testbericht, zie message bij app.get / "
     });
 });
 
@@ -39,7 +69,7 @@ app.get('/cars', async (req: Request, res: Response) => {
 
         // If selected columns are empty, default to ['id', 'name', 'founded']
         if (!selectedColumns || selectedColumns.length === 0) {
-            selectedColumns = ['id', 'name', 'founded'];
+            selectedColumns = ['id', 'logo', 'name', 'founded'];
         }
 
         // Apply search filter
@@ -67,7 +97,7 @@ app.get('/cars', async (req: Request, res: Response) => {
 });
 
 app.post('/cars', async (req: Request, res: Response) => {
-    const selectedColumns = req.body.columns || ['id', 'name', 'founded'];
+    const selectedColumns = req.body.columns || ['id', 'logo', 'name', 'founded'];
     fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err);

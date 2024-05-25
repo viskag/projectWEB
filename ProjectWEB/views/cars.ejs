@@ -14,7 +14,7 @@
     <label><input type="checkbox" name="columns" value="description" <%= columns.includes('description') ? 'checked' : '' %>> Description</label>
     <label><input type="checkbox" name="columns" value="age" <%= columns.includes('age') ? 'checked' : '' %>> Age</label>
     <label><input type="checkbox" name="columns" value="active" <%= columns.includes('active') ? 'checked' : '' %>> Active</label>
-    <label><input type="checkbox" name="columns" value="imageURL" <%= columns.includes('imageURL') ? 'checked' : '' %>> Image URL</label>
+    <label><input type="checkbox" name="columns" value="logo" <%= columns.includes('logo') ? 'checked' : '' %>> Image URL</label>
     <label><input type="checkbox" name="columns" value="status" <%= columns.includes('status') ? 'checked' : '' %>> Status</label>
     <label><input type="checkbox" name="columns" value="tags" <%= columns.includes('tags') ? 'checked' : '' %>> Tags</label>
     <label><input type="checkbox" name="columns" value="country" <%= columns.includes('country') ? 'checked' : '' %>> Country</label>
@@ -30,7 +30,7 @@
     <thead>
       <tr>
         <% columns.forEach(column => { %>
-          <th><a href="/cars?sort=<%= column %>&order=asc<% columns.forEach(col => { %> &columns=<%= col %><% }) %>"><%= column.charAt(0).toUpperCase() + column.slice(1) %></a></th>
+          <th><%= column.charAt(0).toUpperCase() + column.slice(1) %></th>
         <% }) %>
       </tr>
     </thead>
@@ -43,8 +43,8 @@
                 <%= item.country ? item.country.name : '' %>
               <% } else if (column === 'tags') { %>
                 <%= item.tags.join(', ') %>
-              <% } else if (column === 'imageURL') { %>
-                <img src="<%= item.imageURL %>" alt="<%= item.name %>" width="100">
+              <% } else if (column === 'logo') { %>
+                <img src="<%= item.logo %>" alt="<%= item.name %>" width="100">
               <% } else { %>
                 <%= item[column] %>
               <% } %>
