@@ -15,7 +15,7 @@ app.set("port", process.env.PORT ?? 3000);
 app.get("/", async (req: Request, res: Response) => {
     res.render("index", {
         title: "Homepage",
-        message: "Test123"
+        message: "Test123 - dit staat bij app get '/' - klik hier om de JSON/Data te zien"
     });
 });
 
