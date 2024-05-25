@@ -45,8 +45,8 @@ app.set("port", process.env.PORT ?? 3000);
 
 app.get("/", async (req: Request, res: Response) => {
     res.render("index", {
-        title: "Dit is de startpagina",
-        message: "Testbericht: Dit is de testbericht, zie message bij app.get / "
+        title: "Homepage",
+        message: "Test123"
     });
 });
 
