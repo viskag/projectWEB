@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <title> Land <%= country[0].name %> </title>
+</head>
+<body>
+  <%- include('nav.ejs') %> 
+  <h1> <%= country[0].name %> </h1>
+  <img src="<%=  %>" alt="<%= %>">
+  <p> CO2 uitstoot: <%= country[0].co2_emissions %> mln ton</p>
+  <ul>
+    <li>Hoofdstad: <%= country[0].capital %></li>
+    <li>Bevolking: <%= (country[0].population*1000).toString().replace(/\B(?=(\d{3})+(?!\d))/g,".") %></li>
+    <li>GDP/capita: <%= country[0].gdp_per_capita %> intl $ </li>
+  </ul>
+  <a href="/cars" style="text-decoration: none; margin: 1%; font-size: larger; font-style: italic;">
+    <img src="https://img.icons8.com/?size=16&id=1DQ3UxqezXN2&format=png">Terug naar collectie</a>
+</body>
+</html>

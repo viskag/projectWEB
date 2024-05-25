@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <title>Cars</title>
+</head>
+<body>
+  <%- include('nav.ejs') %>
+  <br>
+  <h1 style="text-align: center;"> Kies informatievelden om te tonen </h1>
+  <br>
+  <form method="POST" action="/cars" style="text-align: center; font-size: larger; font: bold;">
+    <label><input type="checkbox" name="columns" value="id" <%= columns.includes('id') ? 'checked' : '' %>> ID</label>
+    <label><input type="checkbox" name="columns" value="name" <%= columns.includes('name') ? 'checked' : '' %>> Brand Name</label>
+    <label><input type="checkbox" name="columns" value="founded" <%= columns.includes('founded') ? 'checked' : '' %>> Founded Date</label>
+    <label><input type="checkbox" name="columns" value="description" <%= columns.includes('description') ? 'checked' : '' %>> Description</label>
+    <label><input type="checkbox" name="columns" value="age" <%= columns.includes('age') ? 'checked' : '' %>> Age</label>
+    <label><input type="checkbox" name="columns" value="active" <%= columns.includes('active') ? 'checked' : '' %>> Active</label>
+    <label><input type="checkbox" name="columns" value="logo" <%= columns.includes('logo') ? 'checked' : '' %>> Image URL</label>
+    <label><input type="checkbox" name="columns" value="status" <%= columns.includes('status') ? 'checked' : '' %>> Status</label>
+    <label><input type="checkbox" name="columns" value="tags" <%= columns.includes('tags') ? 'checked' : '' %>> Tags</label>
+    <label><input type="checkbox" name="columns" value="country" <%= columns.includes('country') ? 'checked' : '' %>> Country</label>
+    <button type="submit" style="font-size: large; margin-left: 2px;"> Refresh </button>
+  </form>
+  <br>
+  <form action="/cars" method="get" style="text-align: center;">
+    <input type="text" name="search" placeholder="Vul merknaam in..." style="font-size: large;">
+    <button type="submit" style="font-size: large; padding: 2px; margin: 2px;"> Zoeken </button>
+  </form>
+  <br>
+
+  <h2 style="visibility: hidden;"> Automerken </h2>
+  <table class="table">
+    <thead>
+      <tr>
+        
+        <% columns.forEach(column => { %>
+          <th><a href="/cars?sortBy=<%= column %>&sortOrder=<%= column === prevSortBy ? (sortOrder === 'ascending' ? 'descending' : 'ascending') : 'ascending' %>"> <%= column.charAt(0).toUpperCase() + column.slice(1) %> </a></th>
+        <% }) %>
+        <th> Bekijken </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(item => { %>
+        <tr>
+          <% columns.forEach(column => { %>
+            <td>
+              <% if (column === 'country') { %>
+                <%= item.country ? item.country.name : '' %>
+              <% } else if (column === 'tags') { %>
+                <%= item.tags.join(', ') %>
+              <% } else if (column === 'logo') { %>
+                <img src="<%= item.logo %>" alt="<%= item.name %>" width="100">
+              <% } else { %>
+                <%= item[column] %>
+              <% } %>
+            </td>
+          <% }) %>
+          <td>
+            <a href="/details/<%=item.name%>"> <img src="https://img.icons8.com/?size=32&id=44028&format=png"> </a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
