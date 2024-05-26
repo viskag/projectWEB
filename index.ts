@@ -150,7 +150,7 @@ app.get('/country/:name', requireLogin, async (req: Request, res: Response) => {
     const cName: string = req.params.name;
     try {
 
-        const apikey = process.env.APIKEY as string;
+        const apikey = 'Be0SlkkgzngczUhPkJW/WQ==VkpQ1vsazkZGV80R';
         if (!apikey) {
             console.error('API key is not defined');
             return res.status(500).send('API key is not defined');
