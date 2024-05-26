@@ -1,3 +1,4 @@
+//Dit is de code dat gegeven word door MongoDB Atlas bij het aanmaken van uw Cluster
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://admin:<password>@cluster0.kfmzbgp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version

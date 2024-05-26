@@ -2,9 +2,6 @@ import {Collection, MongoClient, ObjectId, ServerApiVersion} from "mongodb";
 import { Car, User } from "../interface";
 import dotenv from "dotenv";
 dotenv.config();
-//const { MongoClient, ServerApiVersion } = require('mongodb');
-//const uri = "mongodb+srv://admin:adminpass@cluster0.kfmzbgp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const uri : string = process.env.URI ?? "mongodb://localhost:27017";
 const client = new MongoClient(uri, {
     serverApi: {
@@ -22,6 +19,7 @@ async function exit() {
   }
   process.exit(0);
 }
+// Maakt connectie aan met database
 export async function connect() {
   try {
       await client.connect();
@@ -49,16 +47,13 @@ export async function getUsers() {
   return await userCollection.find().toArray();
 }
 import bcrypt from 'bcryptjs';
-
 export async function findUserByUsername(username: string): Promise<User | null> {
   return await userCollection.findOne({ username: username });
 }
-
 export async function addUser(user: User): Promise<void> {
   user.password = await bcrypt.hash(user.password, 10); // Hash the password before saving
   await userCollection.insertOne(user);
 }
-
 export async function verifyUser(username: string, password: string): Promise<boolean> {
   const user = await findUserByUsername(username);
   if (user && await bcrypt.compare(password, user.password)) {
@@ -66,4 +61,4 @@ export async function verifyUser(username: string, password: string): Promise<bo
   }
   return false;
 }
-//run().catch(console.dir);
+//run().catch(console.dir);//Code van mongoDB atlas maar niet op deze wijze, cursus gevolgd

@@ -37,19 +37,19 @@ app.get('/cars',requireLogin, async (req: Request, res: Response) => {
     try {
         const carsDB = db.carCollection;
 
-        // Extract sortBy and sortOrder from query parameters or default to 'id' and 'ascending'
+        // Haal sortBy en sortOrder uit de query parameters of doe default 'id' en 'ascending'
         let sortBy: string = typeof req.query.sortBy === 'string' ? req.query.sortBy : 'id';
         let sortOrder: string = typeof req.query.sortOrder === 'string' ? req.query.sortOrder : 'ascending';
 
-        // Toggle sortOrder if the same column header is clicked again
+        // Toggle functionaliteit
         if (sortBy === req.query.prevSortBy) {
             sortOrder = sortOrder === 'ascending' ? 'descending' : 'ascending';
         }
 
-        // Store the current sortBy value in query parameters for future toggling
+        // Sla huidig sortBy op voor mogelijke toggle functionaliteit
         const prevSortBy = sortBy;
 
-        // Extract selected columns from query string or use default if not provided
+        // Haal geselecteerde kolommen/infovelden uit query of gebruik de defaults indien leeg
         let selectedColumns: string[] | undefined = undefined;
         if (typeof req.query.columns === 'string') {
             selectedColumns = [req.query.columns];
@@ -57,12 +57,12 @@ app.get('/cars',requireLogin, async (req: Request, res: Response) => {
             selectedColumns = req.query.columns.map(col => String(col));
         }
 
-        // If selected columns are empty, default to ['id', 'name', 'founded']
+        // Als selected columns leeg is forceer de defaults
         if (!selectedColumns || selectedColumns.length === 0) {
             selectedColumns = ['id', 'logo', 'name', 'founded'];
         }
 
-        // Apply search filter
+        // Filter
         let query: any = {};
         if (req.query.search && typeof req.query.search === 'string') {
             const searchQuery = req.query.search.toLowerCase();
@@ -73,10 +73,10 @@ app.get('/cars',requireLogin, async (req: Request, res: Response) => {
             };
         }
 
-        // Get data from MongoDB
+        // Data uit MongoDB halen
         let jsonData: Car[] = await carsDB.find(query).toArray();
 
-        // Sort jsonData based on sortBy property and sortOrder
+        // Sort jsonData op sortBy en sortOrder
         jsonData.sort((a, b) => {
             if (sortOrder === 'ascending') {
                 if (a[sortBy] < b[sortBy]) return -1;
@@ -88,7 +88,7 @@ app.get('/cars',requireLogin, async (req: Request, res: Response) => {
             return 0;
         });
 
-        // Pass selected columns and search query to the template
+        // Geef de selected columns en search query door
         res.render('cars', { data: jsonData, columns: selectedColumns, search: req.query.search, sortBy, sortOrder, prevSortBy, username: req.session.username });
     } catch (err) {
         console.error(err);
@@ -101,7 +101,7 @@ app.post('/cars', requireLogin, async (req: Request, res: Response) => {
         const carsDB = db.carCollection;
         let selectedColumns = ['id', 'name'];
 
-        // Ensure 'id' and 'logo' are always included at the beginning if 'logo' is selected
+        // Zorg ervoor dat 'id' en 'logo' altijd vooraan staan als 'logo' selected is
         if (req.body.columns != undefined && Array.isArray(req.body.columns)) {
             if (req.body.columns.includes('logo')) {
                 selectedColumns = ['id', 'logo', 'name'];
@@ -119,10 +119,10 @@ app.post('/cars', requireLogin, async (req: Request, res: Response) => {
             }
         }
 
-        // Get data from database
+        // Data van database halen
         const jsonData: Car[] = await carsDB.find({}).toArray();
 
-        // Render the template with the fetched data
+        // Render de template met de gehaalde data
         res.render('cars', { data: jsonData, columns: selectedColumns, sortBy: req.query.sortBy, sortOrder: req.query.sortOrder, prevSortBy: req.query.prevSortBy,username: req.session.username });
     } catch (err) {
         console.error(err);
@@ -145,7 +145,7 @@ app.get('/details/:name', requireLogin, async (req: Request, res: Response) => {
     }
 });
 
-// Route to display details about a country
+// Route: display country details
 app.get('/country/:name', requireLogin, async (req: Request, res: Response) => {
     const cName: string = req.params.name;
     try {
@@ -156,7 +156,7 @@ app.get('/country/:name', requireLogin, async (req: Request, res: Response) => {
             return res.status(500).send('API key is not defined');
         }
 
-        // Fetch country details from the API
+        // Fetch country details van API
         const response = await fetch(`https://api.api-ninjas.com/v1/country?name=${cName.toLowerCase()}`, {
             headers: {
                 'X-Api-Key': apikey
@@ -167,7 +167,7 @@ app.get('/country/:name', requireLogin, async (req: Request, res: Response) => {
         }
         const cData = await response.json();
 
-        // Render the template with the country data
+        // Render de template met country data
         res.render('country', { country: cData ,username: req.session.username});
     } catch (error) {
         console.error(error);
@@ -175,13 +175,13 @@ app.get('/country/:name', requireLogin, async (req: Request, res: Response) => {
     }
 });
 
-// Route to display edit form
+// Route: display edit form
 app.get('/edit/:id',requireAdmin,requireLogin, async (req: Request, res: Response) => {
     try {
         const carsDB = db.carCollection;
         const car: Car | null = await carsDB.findOne({ id: parseInt(req.params.id) });
         if (car) {
-            res.render('edit', { car,username: req.session.username });
+            res.render('edit', { car, username: req.session.username });
         } else {
             res.status(404).send('Car not found');
         }
@@ -191,16 +191,15 @@ app.get('/edit/:id',requireAdmin,requireLogin, async (req: Request, res: Respons
     }
 });
 
-// Route to handle edit form submission
+// Route: handle edit form submission
 app.post('/edit/:id', requireAdmin, requireLogin, async (req: Request, res: Response) => {
     try {
         const carsDB = db.carCollection;
         const updatedCar: Partial<Car> = {
             name: req.body.name,
             founded: req.body.founded,
-            tags: req.body.tags ? req.body.tags.split(',').map((tag: string) => tag.trim()) : [], // Process tags
-            status: req.body.status, // Process status
-            // Add other fields as needed
+            tags: req.body.tags ? req.body.tags.split(',').map((tag: string) => tag.trim()) : [],
+            // Eventueel andere velden hieronder toevoegen
         };
         const result = await carsDB.updateOne({ id: parseInt(req.params.id) }, { $set: updatedCar });
         if (result.modifiedCount > 0) {
@@ -221,9 +220,7 @@ app.get("/db", async (req, res) => {
     res.json(cars);
 })
 
-
-
-// Middleware to check if the user is admin
+// Middleware: check if user is admin
 function requireAdmin(req: Request, res: Response, next: NextFunction) {
     // Check if the user is authenticated and their username is "admin"
     if (req.session.username === 'admin') {
@@ -234,7 +231,7 @@ function requireAdmin(req: Request, res: Response, next: NextFunction) {
         res.status(403).send('Enkel ADMINS mogen bewerking doorvoeren');
     }
 }
-// Middleware to check if the user is logged in
+// Middleware: check if user is logged in
 function requireLogin(req: Request, res: Response, next: NextFunction) {
     // Check if the user is authenticated
     if (req.session.username) {
@@ -245,7 +242,7 @@ function requireLogin(req: Request, res: Response, next: NextFunction) {
         res.redirect('/login');
     }
 }
-// Middleware to check if the user is already logged in
+// Middleware: check if user is already logged in
 function redirectToDashboardIfLoggedIn(req: Request, res: Response, next: NextFunction) {
     // Check if the user is authenticated
     if (req.session.username) {
@@ -294,9 +291,9 @@ app.get('/login', redirectToDashboardIfLoggedIn, (req, res) => {
       res.redirect('/login');
     }
   });
-  // Logout route
+// Logout route
 app.get('/logout', (req: Request, res: Response) => {
-    // Clear the session
+    // Opschonen/sluiten
     req.session.destroy((err: any) => {
       if (err) {
         console.error('Error destroying session:', err);
@@ -307,18 +304,11 @@ app.get('/logout', (req: Request, res: Response) => {
     });
   });
 
-
-
-
-
-
-
   const flagsData = require('./flags.json');
-  // Route handler for /countries
+  // Route: display countries ('subdata')
   app.get('/countries', requireLogin, async (req: Request, res: Response) => {
       try {
         const first20Countries = flagsData.slice(0, 20);
-          // Render a view to display the country information
           res.render('countries', { countries: first20Countries, username: req.session.username});
       } catch (error) {
           console.error(error);
@@ -327,6 +317,6 @@ app.get('/logout', (req: Request, res: Response) => {
   });
 app.listen(app.get("port"), async () => {
     await db.connect();;
-    //await db.seed();
+    //await db.seed();//Voer dit eenmalig uit om data in DB te schrijven
     console.log("Server started on http://localhost:" + app.get("port"));
 });
