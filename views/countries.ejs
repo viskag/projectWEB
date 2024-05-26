@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landen</title>
+</head>
+<body class="countries">
+    <%- include('nav.ejs') %>
+    <div class="container">
+        <h1>Landen</h1>
+        <ul>
+            <% countries.forEach(country => { %>
+                <li>
+                    <div class="country-info">
+                        <div>
+                            <span><%= country.country %></span>
+                        </div>
+                        <div>
+                            <img src="<%= country.flag %>" alt="<%= country.name %>" />
+                        </div>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <title> Auto aanpassen </title>
+</head>
+<body style="text-align: center;">
+    <%- include('nav.ejs') %>
+    <br>
+    <img src="<%= car.logo %>" alt="<%= car.name %>" width="240" height="240">
+    <h1> <%= car.name %> - edit </h1>
+    <br>
+    <form action="/edit/<%= car.id %>" method="post">
+        <div>
+            <label for="tags">Labels en tags (gescheiden door komma!):</label>
+            <input type="text" id="tags" name="tags" value="<%= car.tags ? car.tags.join(', ') : '' %>">
+        </div>
+        <div>
+            <label for="name"> Bedrijfsnaam / merk: </label>
+            <input type="text" id="name" name="name" value="<%= car.name %>">
+        </div>
+        <div>
+            <label for="founded"> Beschrijving / samenvatting: </label>
+            <input type="text" id="founded" name="founded" value="<%= car.description %>">
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="standard" <%= car.status === 'standard' ? 'selected' : '' %>>Standard</option>
+                <option value="premium" <%= car.status === 'premium' ? 'selected' : '' %>>Premium</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" style="font-size: larger;">Opslaan</button>
+    </form>
+    <br>
+    <a href="/cars" style="text-decoration: none; margin: 1%; font-size: larger; font-style: italic;">
+    <img src="https://img.icons8.com/?size=16&id=1DQ3UxqezXN2&format=png">Terug naar collectie</a>
+</body>
+</html>

@@ -1,5 +1,5 @@
 import {Collection, MongoClient, ObjectId, ServerApiVersion} from "mongodb";
-import { Car } from "../interface";
+import { Car, User } from "../interface";
 import dotenv from "dotenv";
 dotenv.config();
 //const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -13,21 +13,6 @@ const client = new MongoClient(uri, {
       deprecationErrors: true,
     }
   });
-// export async function run() {
-//     try {
-  
-//       // Connect the client to the server	(optional starting in v4.7)
-//       await client.connect();
-  
-//       // Send a ping to confirm a successful connection
-//       await client.db("admin").command({ ping: 1 });
-//       console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//     } finally {
-  
-//       // Ensures that the client will close when you finish/error
-//       await client.close();
-//     }
-// }
 async function exit() {
   try {
       await client.close();
@@ -50,6 +35,7 @@ export async function connect() {
 const jsonData = require("../data.json");
 const data : Car[] = jsonData;
 export const carCollection: Collection<Car> = client.db("Website").collection<Car>("Cars");
+export const userCollection: Collection<User> = client.db("Website").collection<User>("Users");
 export async function seed(){
     if (await carCollection.countDocuments() === 0) {
         await carCollection.insertMany(data);
@@ -58,5 +44,26 @@ export async function seed(){
 }
 export async function getCars() {
   return await carCollection.find().toArray();
+}
+export async function getUsers() {
+  return await userCollection.find().toArray();
+}
+import bcrypt from 'bcryptjs';
+
+export async function findUserByUsername(username: string): Promise<User | null> {
+  return await userCollection.findOne({ username: username });
+}
+
+export async function addUser(user: User): Promise<void> {
+  user.password = await bcrypt.hash(user.password, 10); // Hash the password before saving
+  await userCollection.insertOne(user);
+}
+
+export async function verifyUser(username: string, password: string): Promise<boolean> {
+  const user = await findUserByUsername(username);
+  if (user && await bcrypt.compare(password, user.password)) {
+    return true;
+  }
+  return false;
 }
 //run().catch(console.dir);

@@ -1,0 +1,19 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Login</title>
+</head>
+<body style="text-align: center;">
+    <%- include('nav.ejs') %>
+    <br>
+    <h1> Login </h1>
+    <br>
+  <form action="/login" method="POST" style="font-size: larger;">
+    <input type="text" name="username" placeholder="gebruikersnaam..." required><br>
+    <input type="password" name="password" placeholder="wachtwoord..." required><br>
+    <button type="submit" style="font-size: larger;margin: 1%;">Login</button>
+  </form>
+  <br>
+</body>
+</html>

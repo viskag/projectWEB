@@ -15,3 +15,9 @@ export interface Car {
     };
     [key: string]: string | number | boolean | string[] | { name: string; capital: string; population: number };
 }
+
+export interface User {
+    id: number,
+    username: string;
+    password: string;
+}

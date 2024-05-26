@@ -3,6 +3,10 @@
       <li><a href="/">Home</a></li>
       <li><a href="/cars">Collectie</a></li>
       <li><a href="/countries">Landen</a></li>
-      <li><a href="/users">Users</a></li>
+      <% if (username) { %>
+        <li><a href="/logout">Log out</a></li>
+    <% } else { %>
+        <li><a href="/login">Log in</a></li>
+    <% } %>
     </ul>
 </nav>

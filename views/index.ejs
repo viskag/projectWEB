@@ -7,7 +7,30 @@
     <title><%= title %></title>
 </head>
 <body>
-    <%- include('nav.ejs') %> 
-    <a href="/db"> <%= message %> </a>
+    <%- include('nav.ejs') %>
+    <br>
+    <img src="https://img.icons8.com/?size=128&id=48179&format=png" style="display:block;margin-left:auto;margin-right:auto;"> 
+    <div class="button-container">
+        <a href="/login"> <button class="button" > Login </button></a>
+    </div>
+    <br>
+    <img src="https://img.icons8.com/?size=128&id=43970&format=png" style="display:block;margin-left:auto;margin-right:auto;">
+    <div class="button-container">
+        <a href="/register"><button class="button" > Register </button></a>
+    </div>
+    <br>
+    <img src="https://img.icons8.com/?size=128&id=XnHBz2LnhELw&format=png" style="display:block;margin-left:auto;margin-right:auto;">
+    <div class="button-container">
+        <a href="/dashboard"> <button class="button" > Dashboard </button></a>
+    </div>
+    <br>
+    <img src="https://img.icons8.com/?size=128&id=JVH2G1UQSvk5&format=png" style="display:block;margin-left:auto;margin-right:auto;">
+    <div class="button-container">
+        <a href="/db"> <button class="button"> Mijn JSON </button></a>
+    </div>
+    <div class="button-container">
+         <p><%= message %></p>
+    </div>
+    <br>
 </body>
 </html>
