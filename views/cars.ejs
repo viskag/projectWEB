@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <title>Cars</title>
 </head>
-<body>
+<body class="lmargin">
   <%- include('nav.ejs') %>
   <br>
   <h1 style="text-align: center;"> Kies informatievelden om te tonen </h1>
   <br>
   <form method="POST" action="/cars" style="text-align: center; font-size: larger; font: bold;">
-    <label><input type="checkbox" name="columns" value="id" <%= columns.includes('id') ? 'checked' : '' %>> ID</label>
-    <label><input type="checkbox" name="columns" value="name" <%= columns.includes('name') ? 'checked' : '' %>> Brand Name</label>
-    <label><input type="checkbox" name="columns" value="founded" <%= columns.includes('founded') ? 'checked' : '' %>> Founded Date</label>
-    <label><input type="checkbox" name="columns" value="description" <%= columns.includes('description') ? 'checked' : '' %>> Description</label>
-    <label><input type="checkbox" name="columns" value="age" <%= columns.includes('age') ? 'checked' : '' %>> Age</label>
-    <label><input type="checkbox" name="columns" value="active" <%= columns.includes('active') ? 'checked' : '' %>> Active</label>
-    <label><input type="checkbox" name="columns" value="logo" <%= columns.includes('logo') ? 'checked' : '' %>> Image URL</label>
+    <!-- <label><input type="checkbox" name="columns" value="id" <%= columns.includes('id') ? 'checked' : '' %>> ID</label> -->
+    <!-- <label><input type="checkbox" name="columns" value="name" <%= columns.includes('name') ? 'checked' : '' %>> Merk</label> -->
+    <label><input type="checkbox" name="columns" value="founded" <%= columns.includes('founded') ? 'checked' : '' %>> Opgericht</label>
+    <!-- <label><input type="checkbox" name="columns" value="description" <%= columns.includes('description') ? 'checked' : '' %>> Beschrijving</label> -->
+    <!-- <label><input type="checkbox" name="columns" value="age" <%= columns.includes('age') ? 'checked' : '' %>> Leeftijd</label> -->
+    <!-- <label><input type="checkbox" name="columns" value="active" <%= columns.includes('active') ? 'checked' : '' %>> Actief</label> -->
+    <label><input type="checkbox" name="columns" value="logo" <%= columns.includes('logo') ? 'checked' : '' %>> Logo</label>
     <label><input type="checkbox" name="columns" value="status" <%= columns.includes('status') ? 'checked' : '' %>> Status</label>
-    <label><input type="checkbox" name="columns" value="tags" <%= columns.includes('tags') ? 'checked' : '' %>> Tags</label>
-    <label><input type="checkbox" name="columns" value="country" <%= columns.includes('country') ? 'checked' : '' %>> Country</label>
+    <label><input type="checkbox" name="columns" value="tags" <%= columns.includes('tags') ? 'checked' : '' %>> Labels</label>
+    <label><input type="checkbox" name="columns" value="country" <%= columns.includes('country') ? 'checked' : '' %>> Land</label>
     <button type="submit" style="font-size: large; margin-left: 2px;"> Refresh </button>
   </form>
   <br>
@@ -33,9 +33,8 @@
   <table class="table">
     <thead>
       <tr>
-        
         <% columns.forEach(column => { %>
-          <th><a href="/cars?sortBy=<%= column %>&sortOrder=<%= column === prevSortBy ? (sortOrder === 'ascending' ? 'descending' : 'ascending') : 'ascending' %>"> <%= column.charAt(0).toUpperCase() + column.slice(1) %> </a></th>
+          <th><a href="/cars?sortBy=<%= column %>&sortOrder=<%= column === prevSortBy ? (sortOrder === 'ascending' ? 'descending' : 'ascending') : 'ascending' %>"> <%= column.charAt(0).toUpperCase() + column.slice(1) %>&#x25B2;&#x25BC;</a></th>
         <% }) %>
         <th> Bekijken </th>
       </tr>

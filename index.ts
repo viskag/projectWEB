@@ -4,6 +4,7 @@ import path from "path";
 import fs from "fs";
 import { Car } from "./interface";
 import * as db from "./db/database";
+import { ToArray } from "yargs";
 dotenv.config();
 const app: Express = express();
 app.set("view engine", "ejs");
@@ -90,7 +91,17 @@ app.get('/cars', async (req: Request, res: Response) => {
 });
 
 app.post('/cars', async (req: Request, res: Response) => {
-    const selectedColumns = req.body.columns || ['id', 'logo', 'name', 'founded'];
+    let selectedColumns = ['id','name'];
+    if (req.body.columns != undefined && Array.isArray(req.body.columns)) {
+        if (req.body.columns.includes('logo')){selectedColumns = ['id', 'logo','name']}
+        req.body.columns.forEach((el:string) => {
+            if(el != 'logo'){selectedColumns.push(el);}
+        });
+    }
+    else if (req.body.columns != undefined && typeof req.body.columns === 'string'){
+        if (req.body.columns === 'logo'){selectedColumns = ['id', 'logo', 'name'];}
+        else{selectedColumns.push(req.body.columns);}
+    }
     fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, data) => {
         if (err) {
             console.error(err);

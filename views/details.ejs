@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
   <title><%= item.name %> details </title>
 </head>
-<body>
-  <%- include('nav.ejs') %> 
+<body class="lmargin">
+  <%- include('nav.ejs') %>
+  <br>
   <h1> <%= item.id %>. <%= item.name %> </h1>
   <img src="<%= item.logo %>" alt="<%= item.name %>" width="240" height="240">
   <p> <%= item.description %> </p>

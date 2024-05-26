@@ -13,6 +13,16 @@ a:visited, a:link, a {
   text-decoration: none;
 }
 
+/* Main styles */
+
+.lmargin > h1, .lmargin > p {
+  margin-left: 2%;
+}
+
+.lmargin > ul {
+  margin-left: 4%;
+}
+
 /* Navbar Styles */
 .navbar {
   background-color: #333; 
