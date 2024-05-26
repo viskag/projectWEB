@@ -199,6 +199,9 @@ app.post('/edit/:id', requireAdmin, requireLogin, async (req: Request, res: Resp
             name: req.body.name,
             founded: req.body.founded,
             tags: req.body.tags ? req.body.tags.split(',').map((tag: string) => tag.trim()) : [],
+            status: req.body.status,
+            description: req.body.description,
+            active: true,
             // Eventueel andere velden hieronder toevoegen
         };
         const result = await carsDB.updateOne({ id: parseInt(req.params.id) }, { $set: updatedCar });
